@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>悬挂式布局</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.4;
+            color: #666;
+        }
+
+        body {
+            padding: 1em;
+        }
+
+        .Media {
+            display: flex;
+        }
+
+        .Media-figure {
+            margin-right: 1em;
+            width: 66px;
+            height: 66px;
+        }
+
+        .Media--reverse .Media-figure {
+            margin: 0 0 0 1em;
+            order: 1;
+        }
+
+        .Demo {
+            padding: .8em 1em 0;
+            background: hsla(31, 15%, 50%, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="Demo">
+    <div class="Media">
+        <img class="Media-figure" src="结衣.jpg" alt="">
+        <p class="Media-body">新垣结衣（Aragaki Yui），1988年6月11日出生于冲绳县那霸市。日本女演员、歌手、模特。毕业于日出高中[1] 。
+            2001年，参加《nicola》模特比赛并获得最优秀奖。2005年，因出演现代剧《涩谷15》而作为演员出道。2006年，参演校园剧《我的老大，我的英雄》；同年，她还出版了个人首本写真集《水漾青春》。2007年，她从日出高校毕业后开始专注于演艺发展，并发表个人首张音乐专辑《天空》；同年，新垣结衣还主演了爱情片《恋空》，而她也凭借该片获得了多个电影新人奖项[2-3]
+            。2010年，主演爱情片《花水木》[4] 。]</p>
+    </div>
+</div>
+
+<div class="Demo">
+    <div class="Media Media--reverse">
+        <img class="Media-figure" src="结衣.jpg" alt="">
+        <p class="Media-body">新垣结衣（Aragaki Yui），1988年6月11日出生于冲绳县那霸市。日本女演员、歌手、模特。毕业于日出高中[1] 。
+            2001年，参加《nicola》模特比赛并获得最优秀奖。2005年，因出演现代剧《涩谷15》而作为演员出道。2006年，参演校园剧《我的老大，我的英雄》；同年，她还出版了个人首本写真集《水漾青春》。2007年，她从日出高校毕业后开始专注于演艺发展，并发表个人首张音乐专辑《天空》；同年，新垣结衣还主演了爱情片《恋空》，而她也凭借该片获得了多个电影新人奖项[2-3]
+            。2010年，主演爱情片《花水木》[4] 。]</p>
+    </div>
+</div>
+<div class="Demo">
+    <div class="Media">
+        <img class="Media-figure" src="结衣.jpg" alt="">
+        <div class="Media-body">
+            <p>新垣结衣（Aragaki Yui），1988年6月11日出生于冲绳县那霸市。日本女演员、歌手、模特。毕业于日出高中[1] 。
+                2001年，参加《nicola》模特比赛并获得最优秀奖。2005年，因出演现代剧《涩谷15》而作为演员出道。2006年，参演校园剧《我的老大，我的英雄》；同年，她还出版了个人首本写真集《水漾青春》。2007年，她从日出高校毕业后开始专注于演艺发展，并发表个人首张音乐专辑《天空》；同年，新垣结衣还主演了爱情片《恋空》，而她也凭借该片获得了多个电影新人奖项[2-3]
+                。2010年，主演爱情片《花水木》[4] 。]
+            </p>
+            <div class="Demo">
+                <div class="Media Media--reverse">
+                    <img class="Media-figure" src="结衣.jpg" alt="">
+                    <p class="Media-body">新垣结衣（Aragaki Yui），1988年6月11日出生于冲绳县那霸市。日本女演员、歌手、模特。毕业于日出高中[1] 。
+                        2001年，参加《nicola》模特比赛并获得最优秀奖。2005年，因出演现代剧《涩谷15》而作为演员出道。2006年，参演校园剧《我的老大，我的英雄》；同年，她还出版了个人首本写真集《水漾青春》。2007年，她从日出高校毕业后开始专注于演艺发展，并发表个人首张音乐专辑《天空》；同年，新垣结衣还主演了爱情片《恋空》，而她也凭借该片获得了多个电影新人奖项[2-3]
+                        。2010年，主演爱情片《花水木》[4] 。]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

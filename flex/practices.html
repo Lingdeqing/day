@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            display: flex;
+        }
+        .item{
+            width: 30px;
+            height: 30px;
+            background: #0e0e0e;
+            border-radius: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="box" style="justify-content: center;align-items: center;">
+    <div class="item"></div>
+</div>
+<div class="box" style="justify-content: space-between;">
+    <div class="item"></div>
+    <div class="item" style="align-self: flex-end;"></div>
+</div>
+<div class="box" style="justify-content: space-between;">
+    <div class="item"></div>
+    <div class="item" style="align-self: center;"></div>
+    <div class="item" style="align-self: flex-end;"></div>
+</div>
+<div class="box" style="flex-wrap: wrap;align-content: space-between;justify-content: flex-end;">
+    <div class="column" style="display: flex;flex-basis:100%;justify-content: space-between;">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <div class="item"></div>
+</div>
+<div class="box" style="flex-wrap:wrap;align-content: space-between;">
+    <div class="column" style="display: flex;flex-basis: 100%;justify-content: space-between;">
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <div class="column" style="display: flex;flex-basis: 100%;justify-content: space-between;">
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+</div>
+<div class="box" style="flex-wrap: wrap;justify-content: space-between;align-content: space-between;">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+</div>
+<div class="box" style="flex-direction:column;flex-wrap: wrap;justify-content: space-between;align-content: space-between;">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+</div>
+<div class="box" style="flex-wrap:wrap;justify-content: space-between;align-content: space-between;">
+    <div class="row" style="display: flex;flex-basis: 100%;justify-content: space-between;">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <div class="row" style="display: flex;flex-basis: 100%;justify-content: center;">
+        <div class="item"></div>
+    </div>
+    <div class="row" style="display: flex;flex-basis: 100%;justify-content: space-between;">
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+</div>
+<div class="box" style="flex-wrap: wrap;justify-content: space-between;align-content: space-between;">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+</div>
+</body>
+</html>

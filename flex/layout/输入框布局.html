@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>输入框布局</title>
+    <style>
+        *{margin:0;padding: 0;box-sizing: border-box;line-height: 1.4;color: #666;}
+        .box{padding:1em;width: 40em;}
+        .InputAddOn{display: flex;}
+        .InputAddOn-item{ font:inherit;background-color: hsla(31,15%,50%,.1);}
+        .InputAddOn-field{flex: 1;}
+        .InputAddOn-field:not(:last-child){border-right: 0;}
+        .InputAddOn-field:not(:first-child){border-left: 0;}
+        .InputAddOn-item, .InputAddOn-field{padding: .5em .75em;border: 1px solid hsla(31,15%,50%,.25);}
+        .InputAddOn-item:first-child, .InputAddOn-field:first-child{border-radius: 2px 0 0 2px;}
+        .InputAddOn-item:last-child, .InputAddOn-field:last-child{border-radius: 0 2px 2px 0;}
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="InputAddOn">
+        <span class="InputAddOn-item">Amount</span>
+        <input type="text" class="InputAddOn-field">
+    </div>
+</div>
+<div class="box">
+    <div class="InputAddOn">
+        <input type="text" class="InputAddOn-field">
+        <button class="InputAddOn-item">Go</button>
+    </div>
+</div>
+<div class="box">
+    <div class="InputAddOn">
+        <span class="InputAddOn-item">Amount</span>
+        <input type="text" class="InputAddOn-field">
+        <button class="InputAddOn-item">Go</button>
+    </div>
+</div>
+</body>
+</html>

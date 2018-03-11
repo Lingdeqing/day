@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圣杯布局</title>
+    <style>
+        *{margin:0;padding: 0;box-sizing: border-box;line-height: 1.4;color: #fff;}
+
+        .u-textCenter{text-align: center !important;}
+        .u-1of2{flex:none !important;width: 50% !important;}
+        .u-1of3{flex:none !important;width: 33.3333% !important;}
+        .u-1of4{flex:none !important;width: 25% !important;}
+
+        .HolyGrail{display: flex;flex-direction: column;min-height: 100vh;}
+        header, footer{flex: 0;height: 3em;background: dimgrey;}
+        .HolyGrail-body{display: flex;
+            /*flex: 1;*/
+        }
+        .HolyGrail-nav{order: -1;}
+        .HolyGrail-nav, .HolyGrail-ads{flex: 0 0 12em;background: orangered;}
+        .HolyGrail-content{flex: 1;background: rebeccapurple;}
+        
+        @media (max-width: 780px) {
+            .HolyGrail-body{flex-direction: column;}
+            .HolyGrail-nav, .HolyGrail-ads{flex: auto;}
+        }
+    </style>
+</head>
+<body>
+<div class="HolyGrail u-textCenter">
+    <header>#header</header>
+    <div class="HolyGrail-body">
+        <main class="HolyGrail-content">#center</main>
+        <nav class="HolyGrail-nav">#left</nav>
+        <aside class="HolyGrail-ads">#right</aside>
+    </div>
+    <footer>#footer</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .test-flex-direction{
+            display: flex;
+            flex-direction: row;    /*定义主轴方向*/
+            flex-wrap: wrap;    /*定义项目是否换行*/
+            justify-content: center;    /*定义项目在主轴的对齐*/
+            align-items: center;    /*定义项目在交叉轴的对齐*/
+            align-content: center;  /*多行时，一行对应一个主轴，定义多个主轴在交叉轴的对齐*/
+        }
+        .item{width: 200px;height: 200px;line-height:200px;text-align:center;color: #fff;background: orange;}
+    </style>
+</head>
+<body>
+<div class="test-flex-direction">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item">11</div>
+    <div class="item" style="order:-1;">12</div>
+    <div class="item" style="/*flex-grow: 1;*/flex-shrink: 0;flex-basis: 150px;align-self:flex-end;">13</div>
+</div>
+</body>
+</html>
