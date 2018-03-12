@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="datum">
+    <p>Apple</p>
+    <p>Pear</p>
+    <p>Banana</p>
+</div>
+<div class="data">
+    <p>Apple</p>
+    <p>Pear</p>
+    <p>Banana</p>
+</div>
+<script type="text/javascript" src="js/d3.js"></script>
+<script type="text/javascript">
+    var data = 'China'
+
+    var p = d3.selectAll('.datum p')
+    p.datum(data)
+
+    p.text(function (d, i) {
+        return '第　'+i+'　个元素绑定的数据是　' + d
+    })
+
+    var dataset = ['I like dogs', 'I like cats', 'I like snakes']
+    var p1 = d3.selectAll('.data p')
+    p1.data(dataset)
+
+    p1.text(function (d, i) {
+        return '第　'+i+'　个元素绑定的数据是　' + d
+    })
+</script>
+</body>
+</html>
