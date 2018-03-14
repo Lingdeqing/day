@@ -8,7 +8,7 @@
     <title>Document</title>
     <style>
         .axis path,
-        .axis line{
+        .axis line {
             fill: none;
             stroke: black;
             shape-rendering: crispEdges;
@@ -19,125 +19,276 @@
             font-size: 11px;
         }
 
-        *{margin:0;padding: 0;}
-        body{padding:10px 100px;}
-        .wrap{width: 50%;}
-        .table{position:relative;padding-left: 50px;}
-        .table table{table-layout: fixed;border-collapse:collapse;border: 1px solid;}
-        .table table th,
-        .table table td{width: 49px;border: 1px solid;}
-        .table ul{position: absolute;width: 50px;left:1px;top:22px;}
-        .table ul li{list-style: none;border: 1px solid;margin-top: -1px;height: 20.5px;line-height: 20.5px;}
-        .table ul li:first-child{margin-top: 0;}
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-        .tableWrap{overflow-x: auto;}
+        body {
+            padding: 10px 100px;
+        }
+
+        .wrap {
+            width: 50%;
+        }
+
+        .table {
+            position: relative;
+            padding-left: 50px;
+            margin-top:-10px;
+        }
+
+        .table table {
+            table-layout: fixed;
+            border-collapse: collapse;
+            border: 1px solid;
+            width: 100%;
+        }
+
+        .table table th,
+        .table table td {
+            width: 49px;
+            border: 1px solid;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .table ul {
+            position: absolute;
+            width: 50px;
+            left: 1px;
+            top: 21.5px;
+        }
+
+        .table ul li {
+            list-style: none;
+            border: 1px solid;
+            margin-top: -1px;
+            height: 20.5px;
+            line-height: 20.5px;
+        }
+
+        .table ul li:first-child {
+            margin-top: 0;
+        }
+
+        .tableWrap {
+            overflow-x: auto;
+        }
+        .scroll{overflow-x: auto;margin:0px 0 0 50px;}
+        .scroll>div{height: 1px;}
     </style>
 </head>
 <body>
 
 <div class="wrap" style="width: 50%">
-    <div id="bar" style="width: 100%;height: 400px;"></div>
-    <div class="table">
-        <ul>
-            <li>日常</li>
-            <li>日常</li>
-        </ul>
-        <div class="tableWrap">
-            <table>
-                <thead>
-                <tr>
-                    <th>衬衫</th>
-                    <th>羊毛衫</th>
-                    <th>雪纺衫</th>
-                    <th>裤子</th>
-                    <th>高跟鞋</th>
-                    <th>袜子</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>1</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <div id="bar" style="width: 100%;height: 472px;"></div>
+    <!--模拟滚动条-->
+    <div class="scroll"><div></div></div>
 </div>
+
 <script type="text/javascript" src="js/d3.js"></script>
 <script type="text/javascript">
-    // var width = 400;
-    // var height = 400
-    // var svg = d3.select('body')
-    //     .append('svg')
-    //     .attr('width', width)
-    //     .attr('height', height)
-    //
-    // var padding = {
-    //     left: 30,
-    //     right: 30,
-    //     top: 30,
-    //     bottom: 30
-    // }
-    // var rectPadding = 5
-    //
-    // // 定义一个数组
-    // var dataset = [10, 20, 30, 40, 33, 24, 12, 5];
-    //
-    // // 比例尺
-    // var xScale = d3.scale.ordinal()
-    //     .domain(d3.range(dataset.length))
-    //     .rangeRoundBands([0, width - padding.left - padding.right])
-    // var yScale = d3.scale.linear()
-    //     .domain([0, d3.max(dataset)])
-    //     .rangeRound([height - padding.top - padding.bottom, 0])
-    //
-    // // 绘制矩形
-    // svg.selectAll('g')
-    //     .data(dataset)
-    //     .enter()
-    //     .append('rect')
-    //     .attr('transform', 'translate('+padding.left+','+padding.top+')')
-    //     .attr('x', function (d, i) {
-    //         return xScale(i)
-    //     })
-    //     .attr('y', function (d, i) {
-    //         return  yScale(d)
-    //     })
-    //     .attr('width', xScale.rangeBand() - rectPadding)
-    //     .attr('height', function (d, i) {
-    //         return height - padding.top -padding.bottom - yScale(d)
-    //     })
-    //     .attr('fill', 'rebeccapurple')
-    //
-    // // 坐标轴
-    // var xAxis = d3.svg.axis()
-    //     .scale(xScale)
-    //     .orient('bottom')
-    // var yAxis = d3.svg.axis()
-    //     .scale(yScale)
-    //     .orient('left')
-    //
-    // svg.append('g')
-    //     .attr('class', 'axis')
-    //     .attr('transform', 'translate('+padding.left+','+(height - padding.top)+')')
-    //     .call(xAxis)
-    // svg.append('g')
-    //     .attr('transform', 'translate('+padding.left+','+padding.top+')')
-    //     .attr('class', 'axis')
-    //     .call(yAxis)
+    var tableData = [
+        ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10','d11', 'd12', 'd13', 'd14', 'd15', 'd16', 'd17', 'd18', 'd19', 'd20'],
+        ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10','d11', 'd12', 'd13', 'd14', 'd15', 'd16', 'd17', 'd18', 'd19', 'd20'],
+        ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10','d11', 'd12', 'd13', 'd14', 'd15', 'd16', 'd17', 'd18', 'd19', 'd20']
+    ]
+    // 定义一个数组
+    var dataset = [10, 20, 30, 40, 33, 24, 12, 5, 40, 33, 24, 12, 5, 5, 40, 33, 24, 12, 5, 5];
+
+    // 初始化画布，设置画布大小
+    var bar = d3.select('#bar')
+    var barDom = bar[0][0]
+    var size = barDom.getBoundingClientRect()
+    var svg = bar.append('svg')
+        .attr('width', size.width)
+        .attr('height', size.height)
+
+    // 监听resize事件
+    window.onresize = function (ev) {
+
+        size = barDom.getBoundingClientRect()
+
+        // 更新画布大小
+        svg.attr('width', size.width)
+            .attr('height', size.height)
+    }
+
+
+    var colCount = tableData[0].length
+    var rowCount = tableData.length;
+    var colWidth = 50
+    var rowHeight = 30
+    var rectWidth = 50  // 柱占据的宽度（包括空白）
+    var rectPadding = 20
+    var rectRealWidth = rectWidth - rectPadding
+    var padding = {
+        left: 50,
+        right: 0,
+        top: 30,
+        bottom: rowHeight * rowCount
+    }
+
+
+
+    // 比例尺
+    var xScale = function (i) {
+        return rectPadding / 2 + rectWidth * i;
+    }
+    var yScale = d3.scale.linear()
+        .domain([0, d3.max(dataset)])
+        .rangeRound([size.height - padding.top - padding.bottom, 0])
+
+    // 绘制矩形
+    var scrollGroup = svg.append('g')
+    var barGroup = scrollGroup.append('g')
+    barGroup.selectAll('rect')
+        .data(dataset)
+        .enter()
+        .append('rect')
+        .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')')
+        .attr('x', function (d, i) {
+            return xScale(i)
+        })
+        .attr('y', function (d, i) {
+            return yScale(d)
+        })
+        .attr('width', rectRealWidth)
+        .attr('height', function (d, i) {
+            return size.height - padding.top - padding.bottom - yScale(d)
+        })
+        .attr('fill', 'rebeccapurple')
+
+    // 绘制表格
+    var tableGroup = scrollGroup.append('g')
+        .attr('transform', 'translate('+padding.left+','+(size.height - padding.bottom)+')')
+    var thBorder = '#c8d4e5'
+    var tdBorder = '#dadee4'
+    drawTableGrid(tableGroup, rowCount, colCount, rowHeight, colWidth)
+
+    // 画线
+    function drawLine(group, x1, y1, x2, y2, color) {
+        group.append('line')
+            .attr('x1', x1)
+            .attr('x2', x2)
+            .attr('y1', y1)
+            .attr('y2', y2)
+            .attr('stroke-width', 1)
+            .attr('stroke', color)
+    }
+
+    //  画表格网格
+    function drawTableGrid(group, row, col, rowHeight, colWidth) {
+        var tableWidth = col * colWidth
+        var tableHeight = row * rowHeight
+
+        // 表头背景块
+        group.append('rect')
+            .attr('x', 0)
+            .attr('y', 0)
+            .attr('width', tableWidth)
+            .attr('height', rowHeight)
+            .attr('fill', '#dce7f9')
+
+        // 画表格体边框
+        // 横线
+        var rowGroup = group.append('g')
+        for(var i = 2; i <= row; i++){
+            drawLine(rowGroup, 0, i * rowHeight, tableWidth, i * rowHeight, tdBorder)
+        }
+        // 竖线
+        var colGroup = group.append('g')
+        for(var i = 0; i <= col; i++){
+            drawLine(colGroup, i * colWidth, rowHeight, i * colWidth, tableHeight, tdBorder)
+        }
+
+        // 画表格头边框
+        var headBorder = group.append('g')
+        // 横线
+        for(var i = 0; i < 2; i++){
+            drawLine(headBorder, 0, i * rowHeight, tableWidth, i * rowHeight, thBorder)
+        }
+        // 竖线
+        for(var i = 0; i <= col; i++){
+            drawLine(colGroup, i * colWidth, 0, i * colWidth, rowHeight, thBorder)
+        }
+
+    }
+    
+    // 填充表格文本
+    function setTableText(group, array, rowHeight, colWidth) {
+        var textGroup = group.append('g')
+        for(var i = 0, row = array.length; i < row; i++){
+            var rowArray = array[i]
+            var rowGroup = textGroup.append('g')
+            for(var j = 0, col = rowArray.length; j < col; j++){
+                var text = rowArray[j]
+                rowGroup.append('text')
+                    .attr('x', colWidth * j + colWidth / 2)
+                    .attr('y', rowHeight * i + rowHeight - 3)
+                    .attr('text-anchor', 'middle')
+                    .html(text)
+            }
+        }
+    }
+
+
+    setTableText(tableGroup, tableData, rowHeight, colWidth)
+
+    
+    // 绘制一个左侧的矩形盖住滚动到左侧的柱状图和表格
+    svg.append('rect')
+        .attr('width', padding.left)
+        .attr('height', size.height)
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('fill', '#fff')
+
+    var rowTitle = ['战时', '平时']
+    var rowTitleGroup = svg.append('g')
+        .attr('transform', 'translate(0,'+(size.height - padding.bottom + rowHeight)+')')
+    function drawRowTitle(group, array, rowHeight, colWidth) {
+        var lineGroup = group.append('g')
+        // 横线
+        for(var i = 0; i <= 2; i++){
+            drawLine(lineGroup, 0, i * rowHeight, colWidth, i * rowHeight, tdBorder)
+        }
+        // 竖线
+        drawLine(lineGroup, 0, 0, 0, rowHeight * 2, tdBorder)
+
+        // 绘制文本
+        var textGroup = group.append('g')
+        for(var i = 0; i < 2; i++){
+            textGroup.append('text')
+                .attr('x', colWidth / 2)
+                .attr('y', rowHeight * i + rowHeight - 3)
+                .attr('text-anchor', 'middle')
+                .html(array[i])
+        }
+    }
+    drawRowTitle(rowTitleGroup, rowTitle, rowHeight, colWidth)
+
+
+    // 坐标轴
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient('left')
+    svg.append('g')
+        .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')')
+        .attr('class', 'axis')
+        .call(yAxis)
+
+    // 初始化滚动条
+    var scroll = document.querySelector('.scroll')
+    var scrollInner = scroll.childNodes[0]
+    scrollInner.style.width = colWidth * colCount + 'px'
+
+    // 监听滚动事件
+    scroll.onscroll = function () {
+        scrollGroup.attr('transform', 'translate(-'+this.scrollLeft+', 0)')
+    }
 
 </script>
 </body>
