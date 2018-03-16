@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .axis path,
+        .axis line{
+            fill: none;
+            stroke: black;
+            shape-rendering: crispEdges;
+        }
+
+        .axis text {
+            font-family: sans-serif;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="js/d3.js"></script>
+<script type="text/javascript">
+    var width = 400;
+    var height = 400
+    var svg = d3.select('body')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+
+    // 点线数据
+    var nodes = [{name: '南京'}, {name: '上海'},{name: '北京'}, {name:'深圳'}, {name: '广州'}, {name: '无锡'}, {name: '苏州'}]
+    var edges = [{source: 0, target: 1}, {source: 0, target: 2},{source: 0, target:3},
+        {source: 1, target: 4},{source: 1, target: 5},{source: 1, target: 6}]
+
+    // 布局
+    var force = d3.layout.force()
+        .nodes(nodes)
+        .links(edges)
+        .size([width, height])
+        .linkDistance(150)
+        .charge(-400)
+
+    force.start()
+
+    // 添加线
+    var lines = svg.selectAll('line')
+        .data(edges)
+        .enter()
+        .append('line')
+        .style('stroke', '#ccc')
+        .style('stroke-width', 1)
+
+    var color = d3.scale.category20()
+    // 添加点
+    var circles = svg.selectAll('circle')
+        .data(nodes)
+        .enter()
+        .append('circle')
+        .attr('r', 20)
+        .style('fill', function (d, i) {
+            return color(i)
+        })
+        .call(force.drag)   // 使得点能够拖动
+
+    // 添加文字
+    var texts = svg.selectAll('text')
+        .data(nodes)
+        .enter()
+        .append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dx', 40)
+        .attr('dy', 10)
+        .style('fill', 'black')
+        .text(function (d, i) {
+            return d.name
+        })
+
+    // 定时更新点线位置
+    force.on('tick', function () {
+
+        // 更新线的位置
+        lines.attr('x1', function (d, i) {
+            return d.source.x
+        }).attr('y1', function (d, i) {
+            return d.source.y
+        }).attr('x2', function (d, i) {
+            return d.target.x
+        }).attr('y2', function (d, i) {
+            return d.target.y
+        })
+
+        // 更新点的位置
+        circles.attr('cx', function (d, i) {
+            return d.x
+        }).attr('cy', function (d, i) {
+            return d.y
+        })
+
+        // 更新文字的位置
+        texts.attr('x', function (d, i) {
+            return d.x
+        }).attr('y', function (d, i) {
+            return d.y
+        })
+    })
+</script>
+</body>
+</html>

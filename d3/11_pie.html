@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .axis path,
+        .axis line{
+            fill: none;
+            stroke: black;
+            shape-rendering: crispEdges;
+        }
+
+        .axis text {
+            font-family: sans-serif;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="js/d3.js"></script>
+<script type="text/javascript">
+    var width = 400;
+    var height = 400
+    var svg = d3.select('body')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+
+    // 定义一个数组
+    var dataset = [10, 20, 30, 40, 33, 24, 12, 5];
+
+    // 布局
+    var pie = d3.layout.pie()
+    var pieData = pie(dataset)
+    // console.log(pieData)
+
+    var innerRadius = 0;    // 内半径
+    var outerRadius = 150;    // 外半径
+    // 生成器
+    var arcs = d3.svg.arc()
+        .innerRadius(innerRadius)
+        .outerRadius(outerRadius)
+
+
+    // 生成group
+    var arcGroups = svg.selectAll('g')
+        .data(pieData)
+        .enter()
+        .append('g')
+        .attr('transform', 'translate('+width / 2+','+height / 2+')')
+
+    // 颜色比例尺
+    var color = d3.scale.category10()   // 有10种颜色的比例尺
+
+    // 用path绘制饼图
+    arcGroups.append('path')
+        .attr('fill', function (d, i) {
+            return color(i)
+        })
+        .attr('d', function (d, i) {
+            return arcs(d)
+        })
+
+    // 添加文本
+    arcGroups.append('text')
+        .attr('transform', function (d, i) {
+            return 'translate('+arcs.centroid(d)+')'
+        })
+        .attr('text-anchor', 'middle')
+        .text(function (d) {
+            return d.data
+        })
+</script>
+</body>
+</html>

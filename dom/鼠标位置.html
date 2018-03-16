@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<script type="text/javascript">
+
+    document.onclick = function (ev) {
+        console.log(getMousePagePos(ev))
+    }
+
+    // 获取鼠标相对于屏幕的坐标(不考虑iframe)
+    function getMouseScreenPos(event) {
+        var e = event || window.event
+        return {
+            x: e.screenX,
+                y: e.screenY
+        }
+    }
+
+    // 获取鼠标相对于浏览器的坐标(不考虑iframe， 不考虑滚动条)
+    function getMouseBrowserPos(event) {
+        var e = event || window.event
+        return {
+            x: e.clientX,
+            y: e.clientY
+        }
+    }
+
+    // 获取鼠标相对于页面的坐标
+    function getMousePagePos(event) {
+        var e = event || window.event
+        var scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        return {
+            x:e.pageX || e.clientX + scrollLeft,
+            y: e.pageY || e.clientY + scrollTop
+        }
+    }
+</script>
+</body>
+</html>
