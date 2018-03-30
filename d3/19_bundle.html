@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .link {
+            fill: none;
+            stroke: black;
+            stroke-opacity: .5;
+            stroke-width: 8px;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="js/d3.js"></script>
+<script type="text/javascript">
+    var width = 600;
+    var height = 600
+    var svg = d3.select('body')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+
+    // 数据
+    var cities = {
+        name: "",
+        children:[
+            {name: "北京"},{name: "上海"},{name: "杭州"},
+            {name: "广州"},{name: "桂林"},{name: "昆明"},
+            {name: "成都"},{name: "西安"},{name: "太原"}
+        ]
+    };
+    var railway = [
+        {source: "北京", target: "上海"},
+        {source: "北京", target: "广州"},
+        {source: "北京", target: "杭州"},
+        {source: "北京", target: "西安"},
+        {source: "北京", target: "成都"},
+        {source: "北京", target: "太原"},
+        {source: "北京", target: "桂林"},
+        {source: "北京", target: "昆明"},
+        {source: "北京", target: "成都"},
+        {source: "上海", target: "杭州"},
+        {source: "昆明", target: "成都"},
+        {source: "西安", target: "太原"}
+    ];
+
+    // 集群图布局
+    var cluster = d3.layout.cluster()
+        .size([360, width/2 - 50])
+        .separation(function (a, b) {
+            return (a.parent === b.parent ? 1 : 2) / a.depth
+        })
+
+    // 捆图
+    var bundle = d3.layout.bundle()
+
+    // 转换数据
+    var nodes = cluster.nodes(cities)
+    console.log(nodes)
+
+    var oLinks = map(nodes, railway)
+    var links = bundle(oLinks)
+    console.log(links)
+
+    // 放射线生成器
+    var line = d3.svg.line.radial()
+        .interpolate("bundle")
+        .tension(.85)
+        .radius(function(d) { return d.y; })
+        .angle(function(d) { return d.x / 180 * Math.PI; });
+
+    // 颜色比例尺
+    var color = d3.scale.category20()
+
+    // 绘制连线
+    svg.append("g")
+        .attr("transform", "translate(" + (width/2) + "," + (height/2) + ")")
+        .selectAll(".link")
+        .data(links)
+        .enter()
+        .append("path")
+        .attr("class", "link")
+        .attr("d", line);
+
+    // 绘制节点
+    var nodeGroup = svg.append('g')
+        .attr("transform", "translate(" + (width/2) + "," + (height/2) + ")")
+        .selectAll('g')
+        .data(nodes.filter(function (d) { return !d.children }))
+        .enter()
+        .append('g')
+        .attr('transform', function (d) {
+            return 'rotate('+(d.x - 90)+') translate('+d.y+')'
+        })
+
+    nodeGroup
+        .append('circle')
+        .attr('r', 20)
+        .attr('fill', function (d, i) {
+            return color(i)
+        })
+        .attr('stroke', 'black')
+        .attr('stroke-width', 2)
+
+    nodeGroup.append('text')
+        .attr('transform', function (d) {
+            return 'rotate('+(90- d.x)+')'
+        })
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.3em')
+        .text(function (d) {
+            return d.name
+        })
+
+    function map(nodes, links) {
+        var nodeMap = {}
+        for(var i = 0; i < nodes.length; i ++){
+            nodeMap[nodes[i].name] = nodes[i]
+        }
+
+        var newLinks = []
+        for(var j = 0; j < links.length; j++){
+            newLinks.push({
+                source: nodeMap[links[j].source],
+                target: nodeMap[links[j].target]
+            })
+        }
+        return newLinks
+    }
+
+
+</script>
+</body>
+</html>
