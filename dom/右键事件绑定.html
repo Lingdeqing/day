@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="div" style="height: 30px;background: rebeccapurple;color: #fff;">右键我</div>
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+
+    $('#div').on('contextmenu', function (e) {
+        $(this).css('font-size', '20px')    // 右键
+        return false;
+    }).on('click', function (e) {
+        $(this).css('font-size', '12px')    // 左键
+    })
+
+    // 禁用文档的右键事件
+    $(document).on('contextmenu', function () {
+        return false
+    })
+</script>
+</body>
+</html>

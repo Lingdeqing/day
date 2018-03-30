@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="div" style="height: 30px;background: rebeccapurple;color: #fff;">右键我</div>
+<div id="div2" style="margin-top:10px;height: 30px;background: rebeccapurple;color: #fff;">单击我触发右键事件</div>
+<script type="text/javascript">
+
+    var div = document.getElementById('div')
+    var div2 = document.getElementById('div2')
+
+    div.oncontextmenu = function () {
+        this.style.fontSize = '20px'
+        return false
+    }
+
+    div2.onclick = function () {
+        triggerRClick(div)
+    }
+
+    function triggerRClick(element) {
+        if(window.CustomEvent){
+            element.dispatchEvent(new CustomEvent('contextmenu'))
+        } else if(document.createEvent){
+            var ev = document.createEvent('HTMLEvents')
+            ev.initEvent('contextmenu', true, false)
+            element.dispatchEvent(ev)
+        } else {    // ie
+            element.fireEvent('oncontextmenu')
+        }
+    }
+</script>
+</body>
+</html>
