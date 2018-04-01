@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .test1{
+            width: 90px;
+            height: 60px;
+            animation-name: skyset;
+            animation-duration: 2000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes skyset {
+            0%{background: red;}
+            50%{background: blue;}
+            100%{background: yellow;}
+        }
+
+        .test2{
+            margin:20px;
+            width: 24px;height: 24px;
+            background: url("img/icons.png") 0 0 no-repeat;
+
+            animation-name: switchIcon;
+            animation-duration: 5000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: steps(14  , end);
+        }
+        @keyframes switchIcon {
+            0%{background-position-y: 0;}
+            100%{background-position-y: -616px;}
+        }
+
+        .test3{
+            width: 90px;
+            height: 60px;
+            animation-name: skyset;
+            animation-duration: 2000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: step-start;
+        }
+        .test4{
+            width: 90px;
+            height: 60px;
+            animation-name: skyset;
+            animation-duration: 2000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: step-end;
+        }
+    </style>
+</head>
+<body>
+<div class="test1"></div>
+<div class="test2"></div>
+<div class="test3"></div>
+<div class="test4"></div>
+</body>
+</html>
