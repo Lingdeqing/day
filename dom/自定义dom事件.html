@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="test">点击我触发事件</div>
+<button id="button">清楚alert事件</button>
+<script type="text/javascript">
+    var $ = function(el) {
+        return new _$(el);
+    };
+    var _$ = function(el) {
+        this.el = (el && el.nodeType == 1)? el: document;
+    };
+    _$.prototype = {
+        constructor: this,
+        addEvent: function(type, fn, capture) {
+            var el = this.el;
+            if (window.addEventListener) {
+                el.addEventListener(type, fn, capture);
+                var ev = document.createEvent("HTMLEvents");
+                ev.initEvent(type, capture || false, false);
+
+                if (!el["ev" + type]) {
+                    el["ev" + type] = ev;
+                }
+            } else if (window.attachEvent) {
+                el.attachEvent("on" + type, fn);
+                if (isNaN(el["cu" + type])) {
+                    // 自定义属性
+                    el["cu" + type] = 0;
+                }
+                var fnEv = function(event) {
+                    if (event.propertyName == "cu" + type) { fn.call(el); }
+                };
+                el.attachEvent("onpropertychange", fnEv);
+                if (!el["ev" + type]) {
+                    el["ev" + type] = [fnEv];
+                } else {
+                    el["ev" + type].push(fnEv);
+                }
+            }
+            return this;
+        },
+        fireEvent: function(type) {
+            var el = this.el;
+            if (typeof type === "string") {
+                if (document.dispatchEvent) {
+                    if (el["ev" + type]) {
+                        el.dispatchEvent(el["ev" + type]);
+                    }
+                } else if (document.attachEvent) {
+                    el["cu" + type]++;
+                }
+            }
+            return this;
+        },
+        removeEvent: function(type, fn, capture) {
+            var el = this.el;
+            if (window.removeEventListener) {
+                el.removeEventListener(type, fn, capture || false);
+            } else if (document.attachEvent) {
+                el.detachEvent("on" + type, fn);
+                var arrEv = el["ev" + type];
+                if (arrEv instanceof Array) {
+                    for (var i=0; i<arrEv.length; i+=1) {
+                        el.detachEvent("onpropertychange", arrEv[i]);
+                    }
+                }
+            }
+            return this;
+        }
+    };
+
+    // ------------- 以下为测试用脚本------------
+
+    var fnClick = function(e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+
+        if (target.nodeType === 1) {
+            alert("点击类型：" +  e.type);
+            $(target).fireEvent("alert");
+        }
+    }, funAlert1 = function() {
+        alert("自定义alert事件弹出！");
+    }, funAlert2 = function() {
+        alert("自定义alert事件再次弹出！");
+    };
+
+    // 测试用的张小姐图片
+    var test = document.getElementById("test");
+    $(test)
+        .addEvent("click", fnClick)
+        .addEvent("alert", funAlert1)
+        .addEvent("alert", funAlert2);
+
+    // 删除自定义事件按钮
+    var elButton = document.getElementById("button");
+    $(elButton).addEvent("click", function() {
+        $(test)
+            .removeEvent("alert", funAlert1)
+            .removeEvent("alert", funAlert2);
+
+        alert("清除成功！");
+    });
+</script>
+</body>
+</html>
