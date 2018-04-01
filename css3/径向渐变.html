@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{display:inline-block;margin:10px;font-size:14px;}
+        .test1{width: 300px;height: 150px;background: radial-gradient(yellow, red)}
+        .test2{width: 300px;height: 150px;background: radial-gradient(circle, yellow, red)}
+        .test3{width: 300px;height: 150px;background: radial-gradient(150px circle, yellow, red)}
+        .test4{width: 300px;height: 150px;background: radial-gradient(167.7px circle, yellow, red)}
+        .test5{width: 300px;height: 150px;background: radial-gradient(circle at 50px 50px, yellow, red)}
+        .test6{width: 300px;height: 150px;background: radial-gradient(circle at 16.6667% 33.3333%, yellow, red)}
+        .test7{width: 300px;height: 150px;background: radial-gradient(at 50px 50px, yellow, red)}
+        .test8{width: 300px;height: 150px;background: radial-gradient(closest-side circle at 50px 50px, yellow, red)}
+        .test9{width: 150px;height: 150px;background: radial-gradient(circle, yellow, orange, red, white)}
+        .test10{width: 150px;height: 150px;background: radial-gradient(circle, yellow, orange 33.3333%, red 66.6667%, white)}
+        .test11{width: 200px;height: 200px;background: radial-gradient(50px 100px ellipse, #333 40px, yellow 41px, red)}
+        .test12{width: 200px;height: 200px;background: radial-gradient(50px 100px ellipse, #333 40px, yellow 40px, red)}
+        .test13{width: 200px;height: 200px;background: radial-gradient(50px 100px ellipse, transparent 40px, yellow 41px, red 49px, transparent 50px),radial-gradient(30px circle, red 29px, transparent 30px);}
+        .test14{width: 200px;height: 200px;background: radial-gradient(5px 10px ellipse, transparent 4px, yellow 5px, red 6px, transparent 7px),radial-gradient(3px circle, red 3px, transparent 4px);background-size: 25px;}
+        .test15{position:relative;width: 200px;height: 100px;background:red;}
+        .test15:after{content: '';position: absolute;left:0;right: 0;height: 10px;bottom: -10px;background: radial-gradient(10px 5px ellipse at 50% 0, red 9px, transparent 10px);background-size: 20px 10px;}
+
+        .test16 {
+            position: relative;
+            width: 262px; height: 262px;
+            border-radius: 50%;
+            background:
+                    linear-gradient(30deg, transparent 40%, rgba(42, 41, 40, .85) 40%) no-repeat 100% 0,
+                    linear-gradient(60deg, rgba(42, 41, 40, .85) 60%, transparent 60%) no-repeat 0 100%,
+                    repeating-radial-gradient(#2a2928, #2a2928 4px, #ada9a0 5px, #2a2928 6px)
+        ;
+            background-size: 50% 100%, 100% 50%, 100% 100%;
+        }
+        .test16:after {
+            position: absolute;
+            top: 50%; left: 50%;
+            margin: -35px;
+            border: solid 1px #d9a388;
+            width: 68px; height: 68px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px #da5b33, inset 0 0 0 27px #da5b33;
+            background: #b5ac9a;
+            content: '';
+        }
+        .test17{ width: 100px; height: 100px;border: 50px solid;border-image: radial-gradient(circle, transparent 50px, yellow 51px, red) 50 stretch}
+    </style>
+</head>
+<body>
+<div class="test1"></div>
+<h2>指定渐变形状和半径</h2>
+<div class="test2"></div>
+<div class="test4"></div>
+<div class="test3"></div>
+<h2>指定渐变起始点位置</h2>
+<div class="test5"></div>
+<div class="test6"></div>
+<div class="test7"></div>
+<h2>指定渐变终点位置</h2>
+<div class="test8"></div>
+<h2>指定渐变颜色断点</h2>
+<div class="test9"></div>
+<div class="test10"></div>
+<h2>椭圆的径向渐变</h2>
+<div class="test11"></div>
+<div class="test12"></div>
+<h2>多个渐变叠加</h2>
+<div class="test13"></div>
+<h2>渐变背景尺寸</h2>
+<div class="test14"></div>
+<div class="test15"></div>
+<h2>repeating-radial-gradient</h2>
+<div class="test16"></div>
+<h2>在border-image上使用</h2>
+<div class="test17"></div>
+</body>
+</html>
