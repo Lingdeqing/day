@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<script type="text/javascript">
+   var onScroll = (function () {
+
+       var _eventCompat = function (event) {
+           // 滚动兼容性处理
+           event.delta = event.wheelDelta ? event.wheelDelta / 120 : -(event.detail || 0) / 3
+           // target兼容性处理
+           if(event.srcElement && !event.target){
+               event.target = event.srcElement
+           }
+           // 阻止浏览器默认事件兼容处理
+           if(!event.preventDefault && event.returnValue !== undefined){
+               event.preventDefault = function () {
+                   event.returnValue = false
+               }
+           }
+           return event
+       }
+
+       if(window.addEventListener){
+           return function (element, fn, capture) {
+               var type = 'mousewheel'
+               if (document.mozFullScreen !== undefined) {
+                   type = "DOMMouseScroll";
+               }
+               element.addEventListener(type, function (event) {
+                   fn.call(element, _eventCompat(event))
+               }, capture || false)
+           }
+       } else if(window.attachEvent){
+           return function (element, fn) {
+               element.attachEvent('onmousewheel', function () {
+                   var event = window.event
+                   fn.call(element, _eventCompat(event))
+               })
+           }
+       }
+
+   })()
+
+    onScroll(document, function (event) {
+        if(event.delta < 0){
+            alert('向下滚动'+event.delta)
+        } else if(event.delta > 0){
+            alert('向上滚动'+event.delta)
+        }
+    })
+
+   // 滚动事件和滚轮事件是不一样的
+//    document.onscroll = function () {
+//        alert(1)
+//    }
+</script>
+</body>
+</html>
