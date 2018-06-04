@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button type="button" id="jsonp">jsonp</button>
+<button type="button" id="cors">cors</button>
+<p></p>
+<script type="text/javascript">
+    var btn1 = document.querySelector('#jsonp'),
+        btn2 = document.querySelector('#cors'),
+        p = document.querySelector('p')
+
+    btn1.addEventListener('click', function () {
+        var script = document.createElement('script')
+        script.src = 'http://127.0.0.1:3000/getData?callback=onSuccess'
+        document.head.appendChild(script)
+        document.head.removeChild(script)
+    })
+
+    function onSuccess(data) {
+        p.innerHTML = data
+    }
+
+    btn2.addEventListener('click', function () {
+        var xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState == 4 && xhr.status == 200){
+                onSuccess(xhr.responseText)
+            }
+        }
+        xhr.open('get', 'http://127.0.0.1:3000/getData', true)
+        xhr.send(null)
+    })
+</script>
+</body>
+</html>
