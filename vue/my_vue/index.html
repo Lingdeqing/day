@@ -1,0 +1,26 @@
+<body>
+<div id="app">
+    <h2>{{title}}</h2>
+    <input v-model="name">
+    <h1>{{name}}</h1>
+    <button v-on:click="clickMe">click me!</button>
+</div>
+<script type="text/javascript" src="compile.js"></script>
+<script type="text/javascript" src="watcher.js"></script>
+<script type="text/javascript" src="observer.js"></script>
+<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript">
+    var h1 = new MyVue({
+        el: '#app',
+        data: {
+            name: 'hello',
+            title: 'vue'
+        },
+        methods: {
+            clickMe: function () {
+                this.title = 'hehkejk'
+            }
+        }
+    })
+</script>
+</body>
