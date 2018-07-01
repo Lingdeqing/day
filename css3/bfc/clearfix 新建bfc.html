@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .clearfix-overflow{overflow: auto;}
+        .clearfix-pseudo:after{display: table;clear: both;content: "";}
+        .left{float: left;width: 15%;height: 40px;}
+        .offset-1{position: relative;top:15px;}
+        .offset-2{position: relative;top:30px;}
+        .blue{background: blue;}
+        .red{background: red;}
+        .green{background: green;}
+        .orange{background: orange;}
+    </style>
+</head>
+<body>
+<div class="clearfix-overflow blue">
+    <div class="left blue">A</div>
+    <div class="left offset-1 blue">B</div>
+    <div class="left offset-2 blue">C</div>
+</div>
+<div class="clearfix-pseudo green">
+    <div class="left green">D</div>
+    <div class="left offset-1 green">E</div>
+    <div class="left offset-2 green">F</div>
+</div>
+<div class="clearfix-overflow orange">
+    <div class="left orange">A</div>
+    <div class="left offset-1 orange">B</div>
+    <div class="left offset-2 orange">C</div>
+</div>
+</body>
+</html>

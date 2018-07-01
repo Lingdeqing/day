@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .parent {
+            margin: 10px;
+            width: 100px;
+            height: 100px;
+            background: antiquewhite;
+        }
+
+        .son {
+            margin-top: 50px;
+            width: 40px;
+            height: 40px;
+            background: red;
+        }
+
+        .demo2 .parent {
+            overflow: hidden;
+        }
+
+        .demo1 .son {
+            overflow: hidden;
+        }
+
+        .imp{text-decoration: underline;font-weight: bold;font-style: italic;color: crimson;}
+    </style>
+</head>
+<body>
+<div class="demo1">
+    <div class="parent">
+        <div class="son"></div>
+    </div>
+</div>
+<div class="demo2">
+    <div class="parent">
+        <div class="son"></div>
+    </div>
+</div>
+<div>
+    <h1>margin重叠的条件</h1>
+    <ol>
+        <li>两者为处于<i class="imp">同一bfc下</i>的<i class="imp">in-flow</i> <i class="imp">block-level</i> boxes</li>
+        <li>两者间不存在line boxes，clearance，padding，border</li>
+        <li>都处于垂直相邻的盒子边缘</li>
+    </ol>
+</div>
+<div>
+    <h1>解释</h1>
+    <ol>
+        <li>demo1的son创建了一个新的bfc，但是son和parent仍处于同一个bfc，所以他俩的margin发生了重叠。</li>
+        <li>demo2的parent创建了一个新的bfc，son就处于parent新创建的bfc中了，parent和son处在了不同的bfc中，因而margin不能重叠。</li>
+    </ol>
+</div>
+</body>
+</html>
